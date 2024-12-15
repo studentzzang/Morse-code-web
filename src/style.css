@@ -1,0 +1,30 @@
+body{ 
+  margin : 0;
+  width: 100%;
+  height:100%;
+
+  overflow: hidden;
+}
+
+#text-container {
+  position:fixed;
+  display: flex;
+  flex-direction: column;
+  left:50%;
+  top:80%;
+}
+
+.str {
+  width : 100%;
+  height : 100%;
+  font-size: 50px;
+  text-align: center;
+}
+
+#explain-container {
+  position:fixed;
+  display: flex;
+  width:100%;
+  height:100%;
+  visibility:hidden;
+}
