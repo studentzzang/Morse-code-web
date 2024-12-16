@@ -21,26 +21,19 @@ var currentMorse = "";
 
 const dashSec = 0.03; // . or - 나누는 초 기준
 
+const pressedKey = new Set();
+
 window.onkeydown = (e) => {
-  setCode(true);
+  pressedKey.add(e.key);
 }
 
 window.onkeyup = (e) => {
-  setCode(false);
+  pressedKey.delete(e.key);
 }
 
-const setCode = (isPress) => {
-
-  if (isPress) {
-    interval += 1/60;
-  }
-  else {
-    getCode();
-    interval = 0;
-  }
-
-  
-}
+setInterval(()=> {
+  if (pressedKey.lengh) 
+}, 16); // 60fps
 
 const getCode = () => { //모스부호로 변환
 
