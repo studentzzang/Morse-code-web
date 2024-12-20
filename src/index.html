@@ -1,52 +1,66 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>morse code device</title>
+  <!DOCTYPE html>
+  <html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>morse code device</title>
+
+    <style>
+      @import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@500&family=Pixelify+Sans&display=swap');
+    </style>
 
     <link rel="stylesheet" href="./style.css">
-</head>
-<body>
+  </head>
+  <body>
 
-  <div id="text-container">
-    <div id="code" class="str"></div>
-    <div id="text" class="str">dd</div>
-  </div>
-
-  <div id="manual-container">
-    <div id="manual" class="paper">
-
-      <p>
-        <h1>모스부호 변환기 설명서 / Introduction</h1>
-        - 모스부호를 키보드로 체험할 수 있습니다.<br>
-        - 아무 키나 누르세요. 짧게 누르면 . 조금 길게 누르면 - 
-        - 
-      </p>
+    <div id="text-container">
+      <div id="code" class="str"></div>
+      <div id="text" class="str">안녕</div>
     </div>
 
-    <div id="code-manual" class="paper">
-      dd
-    </div>
+    <div id="manual-container">
+      <div id="manual" class="paper">
+        <h1>Instruction</h1>
+        <p>
+          - 모스부호를 키보드로 체험할 수 있습니다.<br>
+          - 아무 키나 누르세요. 짧게 누르면 . 조금 길게 누르면 - <br>
+          - 오른쪽 모스부호 표를 참고하세요.<br>
+          - 화면 하단 오른쪽 한/영을 바꿀 수 있습니다. <br>
+          - 한+영을 합쳐서 모스부호를 출력할 수는 없습니다. <br>
+          <br>
+          - You can experience Morse code using your keyboard<br>
+          - Press any key. Short press . If you press a little longer -<br>
+          - Please refer to the Morse code table on the right.<br>
+          - You can change Korean/English on the bottom right of the screen.<br>
+          - You cannot output Morse code by combining Korean and English.<br>
 
-    <button type="button" id="cancle">
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="size-5">
-        <path d="M6.28 5.22a.75.75 0 0 0-1.06 1.06L8.94 10l-3.72 3.72a.75.75 0 1 0 1.06 1.06L10 11.06l3.72 3.72a.75.75 0 1 0 1.06-1.06L11.06 10l3.72-3.72a.75.75 0 0 0-1.06-1.06L10 8.94 6.28 5.22Z" />
-      </svg>
-    </button>
+        </p>
+      </div>
+
+      <div id="code-manual" class="paper">
+        <p>
+
+        </p>
+      </div>
+
+      <button type="button" id="cancle">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="size-5">
+          <path d="M6.28 5.22a.75.75 0 0 0-1.06 1.06L8.94 10l-3.72 3.72a.75.75 0 1 0 1.06 1.06L10 11.06l3.72 3.72a.75.75 0 1 0 1.06-1.06L11.06 10l3.72-3.72a.75.75 0 0 0-1.06-1.06L10 8.94 6.28 5.22Z" />
+        </svg>
+      </button>
+      
+    </div>
     
-  </div>
-  
-  <script type="importmap">
-    {
-      "imports": {
-        "three": "https://cdn.jsdelivr.net/npm/three@0.171.0/build/three.module.js",
-        "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.171.0/examples/jsm/"
+    <script type="importmap">
+      {
+        "imports": {
+          "three": "https://cdn.jsdelivr.net/npm/three@0.171.0/build/three.module.js",
+          "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.171.0/examples/jsm/"
+        }
       }
-    }
-  </script>
+    </script>
 
-  <script type="module" src="./logic.js"></script>
-  <script type="module" src="model.js"></script>
-</body>
-</html>
+    <script type="module" src="./logic.js"></script>
+    <script type="module" src="model.js"></script>
+  </body>
+  </html>
