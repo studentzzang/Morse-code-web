@@ -1,14 +1,3 @@
-const KOR = { // 자음
-  'ㄱ': '.-..', 'ㄴ': '..-.','ㄷ': '-...', 'ㄹ': '...-',
-  'ㅁ': '--', 'ㅂ': '.--','ㅅ': '--.','ㅇ': '-.-','ㅈ': '.--.','ㅊ': '-.-.',
-  'ㅋ': '-..-','ㅌ': '--..','ㅍ': '---', 'ㅎ': '.---',
-  'ㅏ': '.', 'ㅑ': '..', 'ㅓ': '-',
-  'ㅕ': '...', 'ㅗ': '.-', 'ㅛ': '-.',
-  'ㅜ': '....', 'ㅠ': '.-.','ㅡ': '-..',
-  'ㅣ': '..-', 'ㅐ' : '--.-', 'ㅔ': '-.--',
-  '1':'.----', '2' : '..---', '3':'...--', '4':'....-',
-  '5':'......', '6':'-....','7':'--...', '8':'---..', '9':'----.',
-}
 
 const ENG = {
   'A' : '.-', 'B' : '-...', 'C' : '-.-.', 'D' : '-..',
@@ -22,8 +11,23 @@ const ENG = {
   '5':'......', '6':'-....','7':'--...', '8':'---..', '9':'----.',
 }
 
-let langauge = true; //true = kor, false = eng
+const KOR = {
+  'ㄱ' : '.-..', 'ㄴ' : '..-.', 'ㄷ' : '-...', 'ㄹ' : '...-',
+  'ㅁ' : '--', 'ㅂ' : '.--', 'ㅅ' : '--.', 'ㅇ':'-.-',
+  'ㅈ':'.--.', 'ㅊ' :'-.-.', 'ㅋ':'-..-', 'ㅌ':'--..', 'ㅍ':'---', 'ㅎ':'.---',
+  'ㅏ':'.','ㅑ':'..','ㅓ':'-','ㅕ':'...','ㅗ':'.-','ㅛ':'-.',
+  'ㅜ':'....','ㅠ':'.-.','ㅡ':'-..','ㅣ':'..-','ㅐ':'--.-','ㅔ':'-.--',
+  '1':'.----', '2' : '..---', '3':'...--', '4':'....-',
+  '5':'......', '6':'-....','7':'--...', '8':'---..', '9':'----.',
+}
+
+const CHO = ["ㄱ", "ㄲ", "ㄴ", "ㄷ", "ㄸ", "ㄹ", "ㅁ", "ㅂ", "ㅃ", "ㅅ", "ㅆ", "ㅇ", "ㅈ", "ㅉ", "ㅊ", "ㅋ", "ㅌ", "ㅍ", "ㅎ"];
+const JUNG = ["ㅏ", "ㅐ", "ㅑ", "ㅒ", "ㅓ", "ㅔ", "ㅕ", "ㅖ", "ㅗ", "ㅘ", "ㅙ", "ㅚ", "ㅛ", "ㅜ", "ㅝ", "ㅞ", "ㅟ", "ㅠ", "ㅡ", "ㅢ", "ㅣ"];
+const JONG = ["", "ㄱ", "ㄲ", "ㄳ", "ㄴ", "ㄵ", "ㄶ", "ㄷ", "ㄹ", "ㄺ", "ㄻ", "ㄼ", "ㄽ", "ㄾ", "ㄿ", "ㅀ", "ㅁ", "ㅂ", "ㅄ", "ㅅ", "ㅆ", "ㅇ", "ㅈ", "ㅊ", "ㅋ", "ㅌ", "ㅍ", "ㅎ"];
+
+
 let CURRENT_LANG = KOR;
+let isEng = false;
 
 //html
 const codeText = document.querySelector('#code');
@@ -33,21 +37,33 @@ var interval = 0;
 var currentCode = '';
 var currentMorse = "";
 
-const dashSec = 0.19; // . or - 나누는 초 기준
+//res
+var currentString = '';
 
-const pressedKey = new Set();
+const dashSec = 0.03; // . or - 나누는 초 기준
+
+let isPressed = false;
 
 window.onkeydown = (e) => {
-  pressedKey.add(e.key);
+
+  if (e.key === "Control") {
+    isPressed = true;
+  }
+
+  if (e.key === ' ') {
+    convert();
+  }
 }
 
 window.onkeyup = (e) => {
-  pressedKey.delete(e.key);
-  getCode();
+  if (e.key === "Control") {
+    isPressed = false;
+    getCode();
+  }
 }
 
 setInterval((e)=> {
-  if (pressedKey.size > 0){
+  if (isPressed){
 
     interval += 1/60;
   } 
@@ -68,23 +84,37 @@ const getCode = () => { //모스부호로 변환
   currentMorse = currentMorse.concat(currentCode);
   
   codeText.innerHTML = currentMorse;
-
-  convert();
 }
 
 const convert = () => { // 모스부호를 텍스트로
 
-  var reverseMorseCodeMap = Object.fromEntries( // 키-밸류를 밸류-키 로
-    Object.entries(CURRENT_LANG).map(([key, value]) => [value, key])
-  );
+  for (const [key, value] of Object.entries(CURRENT_LANG)) {
+    if (currentMorse === value) {
 
-  var resChar = ''; 
+      currentString += key;
 
-  
+      currentMorse = '';
 
-  console.log(reverseMorseCodeMap);
+      console.log(currentString);
+
+      break;
+    }
+  }
+
+  if(isEng) { //english
+    changeText(currentString);   
+  }
+  else { //korean
+    var koreanString = Hangul.assemble(currentString);
+
+    changeText(koreanString);
+  }
 }
 
-const changeLanguage = () => {
+const changeText = (str) =>{
+  stringText.innerHTML = str;
+}
 
+const changeLang = () => {
+  
 }
