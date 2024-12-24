@@ -63,6 +63,7 @@ document.addEventListener("click", (e)=>{
 	
 	if(intersects.length > 0){ // clicked?
 		manualDiv.style.visibility  = 'visible';
+
 	}
 })
 

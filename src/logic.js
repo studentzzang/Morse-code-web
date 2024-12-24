@@ -32,6 +32,7 @@ let isEng = false;
 //html
 const codeText = document.querySelector('#code');
 const stringText = document.querySelector('#text');
+const changeLangButton = document.querySelector("#lang_input");
 
 var interval = 0;
 var currentCode = '';
@@ -61,6 +62,10 @@ window.onkeyup = (e) => {
     getCode();
   }
 }
+
+changeLangButton.addEventListener("change",function(){
+  changeLang();
+});
 
 setInterval((e)=> {
   if (isPressed){
@@ -112,9 +117,21 @@ const convert = () => { // 모스부호를 텍스트로
 }
 
 const changeText = (str) =>{
+  
   stringText.innerHTML = str;
 }
 
+//토글버튼에서 호출
 const changeLang = () => {
-  
+  isEng = !isEng;
+
+  currentMorse = "";
+  currentString = "";
+
+  if(isEng){
+    CURRENT_LANG = ENG;
+  }
+  else {
+    CURRENT_LANG = KOR;
+  }
 }
