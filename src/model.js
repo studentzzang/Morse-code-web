@@ -30,7 +30,7 @@ const modelLoader = new GLTFLoader();
 
 var manualModel = null;
 
-modelLoader.load('./../assets/model.glb', (model)=> { //machine
+modelLoader.load('/assets/model.glb', (model)=> { //machine
 
 	const scale = 46
 	model.scene.scale.set(scale,scale,scale);
@@ -39,7 +39,7 @@ modelLoader.load('./../assets/model.glb', (model)=> { //machine
 	scene.add(model.scene);
 });
 
-modelLoader.load('./../assets/paper.glb', (model)=>{ // manual
+modelLoader.load('/assets/paper.glb', (model)=>{ // manual
 	model.scene.position.set(-2.3,0,0);
 
 	manualModel = model.scene;
